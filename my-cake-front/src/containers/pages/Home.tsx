@@ -22,7 +22,7 @@ const consulta = async () =>{
 const Home = () => {
   consulta()
   return (
-    <div className='bg-red-500'>Hola Mundo!!</div>
+    <div className='text-2xl'>Hola Mundo!!</div>
   )
 }
 
