@@ -8,5 +8,10 @@ class CakeAdmin(admin.ModelAdmin):
 class CategoriaAdmin(admin.ModelAdmin):
     pass
 
+class PerfilUsuarioAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Cake, CakeAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
+admin.site.register(PerfilUsuario, PerfilUsuarioAdmin)

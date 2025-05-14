@@ -1,29 +1,45 @@
-import axios from 'axios'
+import { useState, useEffect } from 'react';
+import api from '../services/api';
 
-
-const token = localStorage.getItem('token');
-
-const consulta = async () =>{
-  await axios.get('http://localhost:4444/cakes/', {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-  .then(response => {
-    console.log(response.data)
-  })
-  .catch(error => {
-    console.error('Error al obtener los cakes:', error);
-    
-  }); 
-}
-
+const req = async (url: string) => {
+  const response = await api.get(url)
+  const data = await response.data;
+  return data
+};
 
 const Home = () => {
-  consulta()
-  return (
-    <div className='text-2xl'>Hola Mundo!!</div>
-  )
-}
+  const [data, setData] = useState<any>(null);
+  console.log(data)
 
-export default Home
+  useEffect(() => {
+    const req_ = async () => {
+      const data = await req('/perfil/1/');
+      setData(data);
+    }
+
+    req_()
+  }, []);
+
+  return (
+    <div className='text-2xl'>
+      <span className='text-black'>Hola Mundo!!!</span>
+
+      {
+        data ? (
+          <div>
+            <span className='bg-red-500'>Total: {data.count}</span>
+            {data.results?.map((cake: any) => (
+              <div key={cake.id} className='text-black'>
+                {cake.nombre}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <span className='text-black'>Cargando...</span>
+        )
+      }
+    </div>
+  );
+};
+
+export default Home;

@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOST_DEV')
+ALLOWED_HOSTS = env.list('ALLOWED_HOST')
 
 
 # Application definition
@@ -44,6 +44,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -53,23 +54,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
+CORS_ALLOW_ALL_ORIGINS = False
+
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 # CORS_ALLOW_HEADERS = ['X-CSRFToken', 'csrftoken', 'X-Csrftoken']
 
-CCSRF_TRUSTED_ORIGINS = ['']
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-)
+CORS_ORIGIN_WHITELIST = env.tuple('CORS_ORIGIN_WHITELIST')
 
-CORS_ALLOWED_ORIGINS = [
-   'http://localhost:3000'
-
-    # Add other allowed origins as needed
-]
+CORS_ALLOWED_ORIGINS =  env.list('CORS_ALLOWED_ORIGINS')
 
 
-#! ----------------------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -124,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santo_Domingo'
 
 USE_I18N = True
 

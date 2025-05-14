@@ -1,64 +1,99 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// src/pages/Login.tsx
+import { useForm } from "react-hook-form";
+import { useNavigate, useLocation } from "react-router-dom";
+import { loginUser } from "../../services/auth";
+import { useState } from "react";
 
-const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+
+export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  const [errorMessage, setErrorMessage] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: any) => {
     try {
-      const response = await axios.post('http://localhost:4444/api/token/', {
-        username,
-        password,
-      });
-
-      // Guarda tokens
-      localStorage.setItem('token', response.data.access);
-      localStorage.setItem('refresh', response.data.refresh);
-
-      // Redirige al home
-      navigate('/home');
-    } catch (err) {
-      setError('Credenciales incorrectas');
+      await loginUser({ username: data.email, password: data.password });
+      const next = new URLSearchParams(location.search).get("next") || "/";
+      navigate(next);
+    } catch (error:any) {
+      setErrorMessage(error?.response?.data.detail || error.message)
+      // alert("Credenciales incorrectas");
     }
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: 'auto', padding: 20 }}>
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Usuario</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 mt-32">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img
+          alt="INABIE logo"
+          src="https://inabie.gob.do/images/imagenes/LOGO-MOSCA-02.png"
+          className="mx-auto h-auto w-42"
+        />
+        <h1 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-blue-900">
+          Dirección de Gestión Alimentaria
+        </h1>
+        <h2 className="mt-2 text-center text-md font-bold tracking-tight text-gray-500">
+          Accede a tu cuenta
+        </h2>
+      </div>
 
-        <div style={{ marginTop: 10 }}>
-          <label>Contraseña</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div>
+            <label htmlFor="email" className="block text-sm/6 font-medium text-blue-900">
+              Usuario
+            </label>
+            <div className="mt-2">
+              <input
+                id="email"
+                type="text"
+                autoComplete="email"
+                {...register("email", { required: "El correo es obligatorio" })}
+                className="block w-full rounded-md bg-gray-50 px-3 py-1.5 text-base text-blue-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-blue-900 sm:text-sm/6"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{String(errors.email.message)}</p>
+              )}
+            </div>
+          </div>
 
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+          <div>
+            <label htmlFor="password" className="block text-sm/6 font-medium text-blue-900">
+              Contraseña
+            </label>
+            <div className="mt-2">
+              <input
+                id="password"
+                type="password"
+                autoComplete="current-password"
+                {...register("password", { required: "La contraseña es obligatoria" })}
+                className="block w-full rounded-md bg-gray-50 px-3 py-1.5 text-base text-blue-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-blue-900 sm:text-sm/6"
+              />
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">{String(errors.password.message)}</p>
+              )}
+            </div>
+          </div>
 
-        <button type="submit" style={{ marginTop: 15 }}>
-          Entrar
-        </button>
-      </form>
+          <span className="text-red-500">{errorMessage ? errorMessage: ''}</span>
+
+          <div>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="cursor-pointer flex w-full justify-center rounded-md bg-blue-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-900"
+            >
+              {isSubmitting ? "Cargando..." : "Iniciar sesión"}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
-};
-
-export default Login;
+}

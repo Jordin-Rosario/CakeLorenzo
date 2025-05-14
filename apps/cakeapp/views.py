@@ -1,25 +1,51 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from .models import Cake
-from .serializers import CakeSerializers
+from .serializers import CakeSerializers, PerfilUsuarioSerializer
 from rest_framework.filters import SearchFilter
-from rest_framework.pagination import PageNumberPagination
-
-
-class SmallResultsSetPagination(PageNumberPagination):
-    page_size = 10
-    page_size_query_param = 'page_size'
-    max_page_size = 10000
-
+from core.utils import SmallResultsSetPagination
+from django.shortcuts import get_object_or_404
+from .models import PerfilUsuario
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
 
 # Create your views here.
+class PerfilUsuarioAPIView(APIView):
+
+    def get(self, request, pk=None):
+        if pk:
+            perfil = get_object_or_404(PerfilUsuario, pk=pk)
+            serializer = PerfilUsuarioSerializer(perfil)
+        else:
+            perfiles = PerfilUsuario.objects.all()
+            serializer = PerfilUsuarioSerializer(perfiles, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = PerfilUsuarioSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk):
+        perfil = get_object_or_404(PerfilUsuario, pk=pk)
+        serializer = PerfilUsuarioSerializer(perfil, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        perfil = get_object_or_404(PerfilUsuario, pk=pk)
+        perfil.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 class CakeViewSet(ReadOnlyModelViewSet):
-    queryset = Cake.objects.all()
+    queryset = Cake.objects.all().order_by('nombre')
     serializer_class = CakeSerializers
     filter_backends = [SearchFilter]
     search_fields = ['nombre']
-    pagination_class = SmallResultsSetPagination 
-
     permission_classes = [IsAuthenticated]
+    pagination_class = SmallResultsSetPagination 
