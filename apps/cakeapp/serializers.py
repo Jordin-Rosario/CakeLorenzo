@@ -2,11 +2,22 @@ from rest_framework import serializers
 from .models import Cake, Categoria, PerfilUsuario
 from django.contrib.auth.models import User
 
+from django.contrib.auth import get_user_model
+
+UserLogged = get_user_model()
+
+
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        fields = ['id', 'username', 'email']
+
+
+class AuthMeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserLogged
         fields = ['id', 'username', 'email']
 
 class PerfilUsuarioSerializer(serializers.ModelSerializer):

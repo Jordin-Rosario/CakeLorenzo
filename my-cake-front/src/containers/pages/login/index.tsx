@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 import { loginUser } from "../../services/auth";
 import { useState } from "react";
-
+import logo from '../../assets/logoPrueba.png';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -23,20 +23,19 @@ export default function Login() {
       navigate(next);
     } catch (error:any) {
       setErrorMessage(error?.response?.data.detail || error.message)
-      // alert("Credenciales incorrectas");
     }
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 mt-32">
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           alt="INABIE logo"
-          src="https://inabie.gob.do/images/imagenes/LOGO-MOSCA-02.png"
+          src={logo}
           className="mx-auto h-auto w-42"
         />
         <h1 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-blue-900">
-          Dirección de Gestión Alimentaria
+          Iniciar sesión
         </h1>
         <h2 className="mt-2 text-center text-md font-bold tracking-tight text-gray-500">
           Accede a tu cuenta
@@ -83,15 +82,21 @@ export default function Login() {
 
           <span className="text-red-500">{errorMessage ? errorMessage: ''}</span>
 
-          <div>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="cursor-pointer flex w-full justify-center rounded-md bg-blue-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-900"
+              className="cursor-pointer flex w-full mb-0 justify-center rounded-md bg-blue-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-900"
             >
               {isSubmitting ? "Cargando..." : "Iniciar sesión"}
             </button>
-          </div>
+          {/* <div className="flex items-center justify-between mt-0">
+            <div className="text-sm">
+              <a href="#" className="font-medium text-blue-900 hover:text-blue-800">
+                Olvidaste tu contraseña?
+              </a>
+            </div>
+          </div> */}
+          <a href="/create-account" className="underline">Crear cuenta</a>
         </form>
       </div>
     </div>

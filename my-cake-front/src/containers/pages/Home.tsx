@@ -9,11 +9,10 @@ const req = async (url: string) => {
 
 const Home = () => {
   const [data, setData] = useState<any>(null);
-  console.log(data)
 
   useEffect(() => {
     const req_ = async () => {
-      const data = await req('/perfil/1/');
+      const data = await req('api/cakes/');
       setData(data);
     }
 

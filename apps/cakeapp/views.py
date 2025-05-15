@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from .models import Cake
-from .serializers import CakeSerializers, PerfilUsuarioSerializer
+from .serializers import CakeSerializers, PerfilUsuarioSerializer, AuthMeSerializer
 from rest_framework.filters import SearchFilter
 from core.utils import SmallResultsSetPagination
 from django.shortcuts import get_object_or_404
@@ -11,6 +11,13 @@ from rest_framework import status
 from rest_framework.views import APIView
 
 # Create your views here.
+class AuthMeAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = AuthMeSerializer(request.user)
+        return Response(serializer.data)
+
 class PerfilUsuarioAPIView(APIView):
 
     def get(self, request, pk=None):

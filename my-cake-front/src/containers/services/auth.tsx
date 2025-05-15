@@ -19,7 +19,6 @@ export const loginUser = async ({ username, password }: LoginPayload) => {
   });
 
   const user = profileRes.data;
-  console.log(user)
 
   useUserStore.getState().setAuth(user, access, refresh);
 };
