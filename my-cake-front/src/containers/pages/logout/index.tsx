@@ -8,7 +8,7 @@ export default function Logout() {
 
   useEffect(() => {
     logout(); // elimina sesión
-    navigate('/login'); // redirige
+    navigate('/'); // redirige
   }, [logout, navigate]);
 
   return (

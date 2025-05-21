@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 import { loginUser } from "../../services/auth";
 import { useState } from "react";
-import logo from '../../assets/logoPrueba.png';
+import logo from '../../assets/cakeImage.png';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function Login() {
 
   const onSubmit = async (data: any) => {
     try {
-      await loginUser({ username: data.email, password: data.password });
+      await loginUser({ username: data.username, password: data.password });
       const next = new URLSearchParams(location.search).get("next") || "/";
       navigate(next);
     } catch (error:any) {
@@ -34,7 +34,7 @@ export default function Login() {
           src={logo}
           className="mx-auto h-auto w-42"
         />
-        <h1 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-blue-900">
+        <h1 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
           Iniciar sesión
         </h1>
         <h2 className="mt-2 text-center text-md font-bold tracking-tight text-gray-500">
@@ -45,34 +45,36 @@ export default function Login() {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm/6 font-medium text-blue-900">
+            <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">
               Usuario
             </label>
             <div className="mt-2">
               <input
-                id="email"
+                id="username"
+                placeholder="Nombre de usuario"
                 type="text"
-                autoComplete="email"
-                {...register("email", { required: "El correo es obligatorio" })}
-                className="block w-full rounded-md bg-gray-50 px-3 py-1.5 text-base text-blue-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-blue-900 sm:text-sm/6"
+                autoComplete="username"
+                {...register("username", { required: "El usuario es obligatorio" })}
+                className="block w-full rounded-xs bg-gray-50 px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-gray-900 sm:text-sm/6"
               />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{String(errors.email.message)}</p>
+              {errors.username && (
+                <p className="text-red-500 text-sm mt-1">{String(errors.username.message)}</p>
               )}
             </div>
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm/6 font-medium text-blue-900">
+            <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
               Contraseña
             </label>
             <div className="mt-2">
               <input
                 id="password"
                 type="password"
+                placeholder="***************"
                 autoComplete="current-password"
                 {...register("password", { required: "La contraseña es obligatoria" })}
-                className="block w-full rounded-md bg-gray-50 px-3 py-1.5 text-base text-blue-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-blue-900 sm:text-sm/6"
+                className="block w-full rounded-xs bg-gray-50 px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-gray-900 sm:text-sm/6"
               />
               {errors.password && (
                 <p className="text-red-500 text-sm mt-1">{String(errors.password.message)}</p>
@@ -85,13 +87,13 @@ export default function Login() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="cursor-pointer flex w-full mb-0 justify-center rounded-md bg-blue-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-900"
+              className="cursor-pointer flex w-full mb-0 justify-center rounded-xs bg-gray-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
             >
               {isSubmitting ? "Cargando..." : "Iniciar sesión"}
             </button>
           {/* <div className="flex items-center justify-between mt-0">
             <div className="text-sm">
-              <a href="#" className="font-medium text-blue-900 hover:text-blue-800">
+              <a href="#" className="font-medium text-gray-900 hover:text-gray-800">
                 Olvidaste tu contraseña?
               </a>
             </div>
