@@ -31,7 +31,7 @@ const Navbar = () => {
                   <NavLink to="/Ofertas"className="block py-3 px-3 rounded md:bg-transparent md:text-gray-base md:p-0 ">Ofertas</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/" className="block py-2 px-3 rounded md:border-0 md:hover:text-gray-700 md:p-0">Servicios</NavLink>
+                  <NavLink to="/" className="block py-2 px-3 rounded md:border-0 md:hover:text-gray-700 md:p-0">Nosotros</NavLink>
                 </li>
                 <li>
                   <NavLink to="/contact" className="block py-2 px-3 h-full my-auto rounded md:border-0 md:hover:text-gray-700 md:p-0">Contacto</NavLink>

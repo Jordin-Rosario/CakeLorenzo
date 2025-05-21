@@ -10,8 +10,8 @@ interface LoginPayload {
 }
 
 export const createAccountUser = async ({ username, name, lastname, email, password }: LoginPayload) => {
-  console.log()
-  const res = await api.post("/api/create-account/", {
+  try{
+    const res = await api.post("/api/create-account/", {
       user:{
         username,
         name,
@@ -20,16 +20,19 @@ export const createAccountUser = async ({ username, name, lastname, email, passw
         password,
       },
     });
+    
+    const { access, refresh } = res.data;
+    
   
-  // ? Usar api token para loguearse, luego de crear la cuenta
-  const { access, refresh } = res.data;
+    const profileRes = await api.get("/auth/me/", {
+      headers: { Authorization: `Bearer ${access}` },
+    });
   
-
-  const profileRes = await api.get("/auth/me/", {
-    headers: { Authorization: `Bearer ${access}` },
-  });
-
-  const user = profileRes.data;
-
-  useUserStore.getState().setAuth(user, access, refresh);
+    const user = profileRes.data;
+  
+    useUserStore.getState().setAuth(user, access, refresh);
+  } catch (error) { 
+    console.error("Error creating account:", error);
+    return error;
+  }
 };

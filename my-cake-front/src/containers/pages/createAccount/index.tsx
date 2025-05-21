@@ -19,7 +19,9 @@ const CreateAccount = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      await createAccountUser({ username: data.username, name:data.name, lastname:data.lastname, email:data.email, password: data.password });
+      const a = await createAccountUser({ username: data.username, name:data.name, lastname:data.lastname, email:data.email, password: data.password });
+      console.log(a, '----')
+
       const next = new URLSearchParams(location.search).get("next") || "/";
       navigate(next);
     } catch (error:any) {

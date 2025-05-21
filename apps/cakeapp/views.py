@@ -48,6 +48,7 @@ class PerfilUsuarioAPIView(APIView):
             user = perfil.user
             tokens = get_tokens_for_user(user)
             return Response({**serializer.data, **tokens}, status=status.HTTP_201_CREATED)
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def put(self, request, pk):
