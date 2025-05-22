@@ -7,6 +7,7 @@ import Logout from './containers/pages/logout';
 import Error404 from './containers/errors/Error404';
 import MainLayout from "./containers/layouts/MainLayout";
 import { withAuth } from "./hocs/withAuth";
+import Profile from "./containers/pages/profile";
 
 function App() {
   return (
@@ -18,12 +19,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/create-account" element={<CreateAccount />} />
+            <Route path="/" element={<Home />} />
 
           {/* Rutas con Navbar */}
           <Route element={<MainLayout />}>
             {/* Página protegida */}
-            {/* <Route path="/" element={React.createElement(withAuth(Home))} /> */}
-            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={React.createElement(withAuth(Profile))} />
             {/* Aquí puedes agregar más rutas que tengan Navbar */}
           </Route>
 

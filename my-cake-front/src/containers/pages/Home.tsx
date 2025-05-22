@@ -10,7 +10,6 @@ const req = async (url: string) => {
 
 const Home = () => {
   const [data, setData] = useState<any>(null);
-  console.log(data)
 
   useEffect(() => {
     const req_ = async () => {

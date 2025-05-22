@@ -11,19 +11,43 @@ const CreateAccount = () => {
   const location = useLocation();
   
   const [errorMessage, setErrorMessage] = useState("");
+  // const [errors, setError] = useState();
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm();
 
   const onSubmit = async (data: any) => {
+    if (data.password !== data.passwordConfirmation) {
+      setError('password', {type:"validate", message:'Las contraseñas no coinciden.'})
+      // throw new Error("Las contraseñas no coinciden...");
+    }
     try {
-      const a = await createAccountUser({ username: data.username, name:data.name, lastname:data.lastname, email:data.email, password: data.password });
-      console.log(a, '----')
+      const reqCreate = await createAccountUser({ 
+        username: data.username, 
+        name:data.name, 
+        lastname:data.lastname, 
+        email:data.email, 
+        password: data.password,
+        passwordConfirmation: data.passwordConfirmation
+      });
+      
 
-      const next = new URLSearchParams(location.search).get("next") || "/";
-      navigate(next);
+      if (reqCreate?.status != undefined) {
+        if (reqCreate?.status != 200) {
+            Object.entries(reqCreate?.data.user).forEach(([field, messages]:any) => {
+              setError(field, {
+                type: "server",
+                message: messages[0] // solo mostramos el primer mensaje por campo
+            });
+          });
+        }
+      }else{
+        const next = new URLSearchParams(location.search).get("next") || "/";
+        navigate(next);
+      }
     } catch (error:any) {
       setErrorMessage(error?.response?.data.detail || error.message)
     }
@@ -138,20 +162,20 @@ const CreateAccount = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
+              <label htmlFor="passwordConfirmation" className="block text-sm/6 font-medium text-gray-900">
                 Confirmar contraseña <span className="text-red-500">*</span>
               </label>
               <div className="mt-2">
                 <input
-                  id="password"
+                  id="passwordConfirmation"
                   placeholder="************"
                   type="password"
-                  autoComplete="current-password"
-                  {...register("password", { required: "La contraseña es obligatoria" })}
+                  autoComplete="passwordConfirmation"
+                  {...register("passwordConfirmation", { required: "La contraseña es obligatoria" })}
                   className="block w-full rounded-sm bg-gray-50 px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-gray-900 sm:text-sm/6"
                 />
-                {errors.password && (
-                  <p className="text-red-500 text-sm mt-1">{String(errors.password.message)}</p>
+                {errors.passwordConfirmation && (
+                  <p className="text-red-500 text-sm mt-1">{String(errors.passwordConfirmation.message)}</p>
                 )}
               </div>
             </div>

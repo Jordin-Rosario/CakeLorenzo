@@ -1,15 +1,17 @@
 import api from "./api";
 import { useUserStore } from "../stores/userStore";
 
-interface LoginPayload {
+interface CreatePayload {
   username: string;
   name: string;
   lastname: string;
   email: string;
   password: string;
+  passwordConfirmation: string;
 }
 
-export const createAccountUser = async ({ username, name, lastname, email, password }: LoginPayload) => {
+export const createAccountUser = async ({ username, name, lastname, email, password, passwordConfirmation }: CreatePayload) => {
+  
   try{
     const res = await api.post("/api/create-account/", {
       user:{
@@ -18,6 +20,7 @@ export const createAccountUser = async ({ username, name, lastname, email, passw
         lastname,
         email,
         password,
+        passwordConfirmation,
       },
     });
     
@@ -31,8 +34,6 @@ export const createAccountUser = async ({ username, name, lastname, email, passw
     const user = profileRes.data;
   
     useUserStore.getState().setAuth(user, access, refresh);
-  } catch (error) { 
-    console.error("Error creating account:", error);
-    return error;
-  }
-};
+  } catch (error:any) { 
+      return {status:error.response.status, data: error.response.data}
+  }}

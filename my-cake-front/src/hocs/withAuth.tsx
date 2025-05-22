@@ -22,7 +22,6 @@ export const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) =
       return () => clearTimeout(timer);
     }, [isLoggedIn]);
 
-    console.log(isLoggedIn)
 
     if (loading) {
       return (
