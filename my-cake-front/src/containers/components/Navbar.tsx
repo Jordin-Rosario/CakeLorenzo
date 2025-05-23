@@ -55,7 +55,7 @@ const Navbar = () => {
                     </>
                     : 
                     <>
-                      <span aria-hidden="true" className='cursor-pointer'>Perfil {currentUser?.username}</span>
+                      <a aria-hidden="true" className='cursor-pointer' href='/profile'>Perfil {currentUser?.username}</a>
                       <a href='/logout' className='cursor-pointer ms-5 hover:text-red-500'>Cerrar sesion</a>
                     </>
                   }

@@ -10,4 +10,6 @@ urlpatterns = [
     
     path('auth/me/', AuthMeAPIView.as_view()),
     path('perfil/', PerfilUsuarioAPIView.as_view()),
+    path('perfil/<int:pk>/', PerfilUsuarioAPIView.as_view()),
+
 ]

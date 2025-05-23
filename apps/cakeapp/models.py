@@ -37,6 +37,9 @@ class PerfilUsuario(models.Model):
     telefono = models.CharField(max_length=20, blank=True)
     otro_contacto = models.CharField(max_length=20, blank=True)
     direccion = models.TextField(blank=True)
+
+    def __str__(self):
+        return f'{self.user.username}'
     
 class Pedido(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)

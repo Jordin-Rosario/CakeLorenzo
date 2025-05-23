@@ -19,16 +19,15 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/create-account" element={<CreateAccount />} />
-            <Route path="/" element={<Home />} />
 
           {/* Rutas con Navbar */}
           <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+
             {/* Página protegida */}
             <Route path="/profile" element={React.createElement(withAuth(Profile))} />
-            {/* Aquí puedes agregar más rutas que tengan Navbar */}
           </Route>
 
-          {/* Ruta por defecto si no encuentra ninguna */}
           <Route path="*" element={<Error404 />} />
         </Routes>
       </Router>

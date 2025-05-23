@@ -1,4 +1,14 @@
-// Representa la categoría de pastel (CakeTypes)
+export interface PerfilUsuario  {
+  user: {
+    id: number;
+    username: string;
+    email: string;
+  };
+  telefono: string;
+  otro_contacto: string;
+  direccion: string;
+};
+
 export interface Categoria {
     id: number;
     name: string;

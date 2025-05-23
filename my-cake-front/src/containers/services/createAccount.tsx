@@ -3,24 +3,22 @@ import { useUserStore } from "../stores/userStore";
 
 interface CreatePayload {
   username: string;
-  name: string;
-  lastname: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
-  passwordConfirmation: string;
 }
 
-export const createAccountUser = async ({ username, name, lastname, email, password, passwordConfirmation }: CreatePayload) => {
+export const createAccountUser = async ({ username, first_name, last_name, email, password }: CreatePayload) => {
   
   try{
     const res = await api.post("/api/create-account/", {
       user:{
         username,
-        name,
-        lastname,
+        first_name,
+        last_name,
         email,
         password,
-        passwordConfirmation,
       },
     });
     

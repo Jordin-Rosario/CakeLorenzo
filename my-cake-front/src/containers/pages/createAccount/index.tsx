@@ -19,6 +19,8 @@ const CreateAccount = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
+  
+
   const onSubmit = async (data: any) => {
     if (data.password !== data.passwordConfirmation) {
       setError('password', {type:"validate", message:'Las contraseñas no coinciden.'})
@@ -27,13 +29,12 @@ const CreateAccount = () => {
     try {
       const reqCreate = await createAccountUser({ 
         username: data.username, 
-        name:data.name, 
-        lastname:data.lastname, 
+        first_name:data.first_name, 
+        last_name:data.last_name, 
         email:data.email, 
         password: data.password,
-        passwordConfirmation: data.passwordConfirmation
       });
-      
+
 
       if (reqCreate?.status != undefined) {
         if (reqCreate?.status != 200) {
@@ -89,38 +90,38 @@ const CreateAccount = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">
+              <label htmlFor="first_name" className="block text-sm/6 font-medium text-gray-900">
                 Nombres <span className="text-red-500">*</span>
               </label>
               <div className="mt-2">
                 <input
-                  id="name"
+                  id="first_name"
                   type="text"
                   placeholder="Nombres"
-                  autoComplete="name"
-                  {...register("name", { required: "El nombre es obligatorio" })}
+                  autoComplete="first_name"
+                  {...register("first_name", { required: "El nombre es obligatorio" })}
                   className="block w-full rounded-sm bg-gray-50 px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-gray-900 sm:text-sm/6"
                 />
-                {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">{String(errors.name.message)}</p>
+                {errors.first_name && (
+                  <p className="text-red-500 text-sm mt-1">{String(errors.first_name.message)}</p>
                 )}
               </div>
             </div>
             <div>
-              <label htmlFor="lastname" className="block text-sm/6 font-medium text-gray-900">
+              <label htmlFor="last_name" className="block text-sm/6 font-medium text-gray-900">
                 Apellidos <span className="text-red-500">*</span>
               </label>
               <div className="mt-2">
                 <input
-                  id="lastname"
+                  id="last_name"
                   type="text"
                   placeholder="Apellidos"
-                  autoComplete="lastname"
-                  {...register("lastname", { required: "El apellido es obligatorio" })}
+                  autoComplete="last_name"
+                  {...register("last_name", { required: "El apellido es obligatorio" })}
                   className="block w-full rounded-sm bg-gray-50 px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-gray-900 sm:text-sm/6"
                 />
-                {errors.lastname && (
-                  <p className="text-red-500 text-sm mt-1">{String(errors.lastname.message)}</p>
+                {errors.last_name && (
+                  <p className="text-red-500 text-sm mt-1">{String(errors.last_name.message)}</p>
                 )}
               </div>
             </div>
