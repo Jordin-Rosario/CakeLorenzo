@@ -9,6 +9,7 @@ const Profile = () => {
   const { user } = useUserStore();
   const [messageSuccess, setMessageSuccess] = useState<string>('');
   const [visible, setVisible] = useState(true);
+  
   useEffect(() => {
     const timer = setTimeout(() => setVisible(false), 5000);
     return () => clearTimeout(timer);

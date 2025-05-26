@@ -2,6 +2,7 @@ from pathlib import Path
 import environ
 import os
 from .db import MYSQL
+from .jazzmin_config import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
 
 env = environ.Env()
 environ.Env.read_env()
@@ -21,6 +22,7 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOST')
 # Application definition
 
 DJANGO_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -158,3 +160,7 @@ REST_FRAMEWORK = {
 #         "default": env.db("DATABASE_URL"),
 #     }
 #     DATABASES["default"]["ATOMIC_REQUESTS"] = True
+
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+JAZZMIN_UI_TWEAKS = JAZZMIN_UI_TWEAKS
+
