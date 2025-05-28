@@ -2,6 +2,8 @@ import  {NavLink} from 'react-router-dom';
 import logo from '../assets/logoPrueba.png';
 import { useUserStore } from '../stores/userStore';
 import { useState, useEffect } from 'react';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Navbar = () => {
   const { user } = useUserStore();
@@ -28,6 +30,10 @@ const Navbar = () => {
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="[&_li]:my-auto [&_li_a]:text-gray-700 hover:[&_li_a]:text-gray-900 border font-medium flex flex-col p-4 md:p-0 border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-gray-100">
                 <li>
+                  <NavLink to="/"className="block py-3 px-3 rounded md:bg-transparent md:text-gray-base md:p-0 ">Inicio</NavLink>
+                </li>
+               
+                <li>
                   <NavLink to="/Ofertas"className="block py-3 px-3 rounded md:bg-transparent md:text-gray-base md:p-0 ">Ofertas</NavLink>
                 </li>
                 <li>
@@ -36,18 +42,26 @@ const Navbar = () => {
                 <li>
                   <NavLink to="/contact" className="block py-2 px-3 h-full my-auto rounded md:border-0 md:hover:text-gray-700 md:p-0">Contacto</NavLink>
                 </li>
+                {
+                  currentUser &&
+                  <li>
+                    <NavLink to="/contact" className="block py-2 px-3 h-full my-auto rounded md:border-0 md:hover:text-gray-700 md:p-0">
+                      <FontAwesomeIcon icon={faCartShopping} className="text-md text-gray-800" />
+                    </NavLink>
+                  </li>
+                }
                 <div className=''>
                   {!currentUser
                     ?
                     <>
                       <a
-                          className="select-none border-none me-3 text-gray-950 rounded py-2 px-2 text-center font-sans text-xs font-bold uppercase text-gray-700 bg-white shadow-md shadow-gray-900/10 transition-all duration-300 focus:opacity-[0.85] disabled:pointer-events-none"
+                          className="select-none border-none me-3 text-gray-950 py-2 px-2 text-center font-sans text-xs font-semibold uppercase text-gray-700 bg-white shadow-md shadow-gray-900/10 transition-all duration-300 focus:opacity-[0.85] disabled:pointer-events-none"
                           href='/create-account'
                       >
                           Registrate
                       </a>
                       <a
-                          className="select-none text-gray-950 rounded py-2 px-2 text-center font-sans text-xs font-bold uppercase text-gray-700 bg-gray-300 transition-all duration-300 focus:opacity-[0.85] disabled:pointer-events-none"
+                          className="select-none text-white py-2 px-2 bg-black text-center font-sans text-xs font-semibold uppercase transition-all duration-300 disabled:pointer-events-none"
                           href='/login'
                       >
                           Inciar sesion

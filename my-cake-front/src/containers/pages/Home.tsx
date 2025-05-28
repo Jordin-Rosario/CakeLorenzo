@@ -33,7 +33,7 @@ const Home = () => {
             {
               data ? (
                   data.results?.map((cake: any) => (
-               
+                    
                     <Card key={cake.id} cake={cake} />
 
                   ))

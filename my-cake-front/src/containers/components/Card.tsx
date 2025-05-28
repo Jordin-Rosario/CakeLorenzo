@@ -1,8 +1,10 @@
 import React from 'react'
-import { CakeType } from '../types/typex'
+import { Cake } from '../types/typex'
 import CakeImage from '../assets/cakeImage.png'
+import { Link } from 'react-router-dom';
+
 interface Props {
-    cake: CakeType;
+    cake: Cake;
 }
 
 const Card: React.FC<Props> = ({ cake }) => {
@@ -48,10 +50,10 @@ const Card: React.FC<Props> = ({ cake }) => {
             <div className="flex items-start justify-between mt-4 space-x-4 ">
                 <div>
                     <h3 className="text-xs font-bold text-gray-900 sm:text-sm md:text-base">
-                        <a href="#" title="">
+                      <Link to={`/detail/${cake.id}`} title="">
                             {cake.nombre}
                             <span className="absolute inset-0" aria-hidden="true"></span>
-                        </a>
+                        </Link>
                     </h3>
                     {/* <div className="flex items-center mt-2.5 space-x-px">
                         <svg className="w-3 h-3 text-gray-300 sm:w-4 sm:h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

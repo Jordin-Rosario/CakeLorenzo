@@ -21,7 +21,7 @@ export interface Categoria {
 //     category: Categoria;
 //   }
 
-export interface CakeType {
+export interface Cake {
     id: number;
     nombre: string;
     descripcion: string;

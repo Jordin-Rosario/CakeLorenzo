@@ -4,6 +4,7 @@ import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { PerfilUsuario } from "../../types/typex";
 import SuccessAlert from "../../components/AlertSuccess";
+import { toast } from "sonner"
 
 const Profile = () => {
   const { user } = useUserStore();
@@ -59,6 +60,7 @@ const Profile = () => {
       }
     )
     const res = await req.data;
+    toast('In asdasdasdasd')
     setMessageSuccess('Su informacion actualizada con exito.')
     
   } catch (error:any) {
