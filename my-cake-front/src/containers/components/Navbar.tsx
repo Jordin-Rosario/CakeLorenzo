@@ -34,7 +34,7 @@ const Navbar = () => {
                 </li>
                
                 <li>
-                  <NavLink to="/Ofertas"className="block py-3 px-3 rounded md:bg-transparent md:text-gray-base md:p-0 ">Ofertas</NavLink>
+                  <NavLink to="/offers"className="block py-3 px-3 rounded md:bg-transparent md:text-gray-base md:p-0 ">offers</NavLink>
                 </li>
                 <li>
                   <NavLink to="/" className="block py-2 px-3 rounded md:border-0 md:hover:text-gray-700 md:p-0">Nosotros</NavLink>
@@ -44,11 +44,11 @@ const Navbar = () => {
                 </li>
                 {
                   currentUser &&
-                  <li>
-                    <NavLink to="/contact" className="block py-2 px-3 h-full my-auto rounded md:border-0 md:hover:text-gray-700 md:p-0">
-                      <FontAwesomeIcon icon={faCartShopping} className="text-md text-gray-800" />
-                    </NavLink>
-                  </li>
+                <li>
+                  <NavLink to="/contact" className="block py-2 px-3 h-full my-auto rounded md:border-0 md:hover:text-gray-700 md:p-0">
+                    <FontAwesomeIcon icon={faCartShopping} className="text-md text-gray-800" />
+                  </NavLink>
+                </li>
                 }
                 <div className=''>
                   {!currentUser

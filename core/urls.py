@@ -8,6 +8,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from apps.cakeapp.views import PerfilUsuarioAPIView
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,6 +17,11 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/create-account/', PerfilUsuarioAPIView.as_view(), name='create_account'),
+
+    # ? Swagger
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/docs/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
     path('', include('apps.cakeapp.urls'))
     

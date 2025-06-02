@@ -99,7 +99,7 @@ const CreateAccount = () => {
                   type="text"
                   placeholder="Nombres"
                   autoComplete="first_name"
-                  {...register("first_name", { required: "El nombre es obligatorio" })}
+                  {...register("first_name", { required: "El name es obligatorio" })}
                   className="block w-full rounded-sm bg-gray-50 px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-gray-900 sm:text-sm/6"
                 />
                 {errors.first_name && (

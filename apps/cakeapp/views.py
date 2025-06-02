@@ -78,9 +78,9 @@ class PerfilUsuarioAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CakeViewSet(ReadOnlyModelViewSet):
-    queryset = Cake.objects.all().order_by('nombre')
+    queryset = Cake.objects.all().order_by('name')
     serializer_class = CakeSerializers
     filter_backends = [SearchFilter]
-    search_fields = ['nombre']
+    search_fields = ['name']
     # permission_classes = [IsAuthenticated]
     pagination_class = SmallResultsSetPagination 

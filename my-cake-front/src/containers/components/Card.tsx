@@ -22,15 +22,15 @@ const Card: React.FC<Props> = ({ cake }) => {
 
             <div className='absolute left-3 top-3'>
                 {
-                cake.oferta 
+                cake.offer 
                 ? 
                     <div className="mb-1">
-                        <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-black bg-yellow-300 uppercase rounded-full text-center">Oferta</p>
+                        <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-black bg-yellow-300 uppercase rounded-full text-center">offer</p>
                     </div>
                 : ''
                 }
                 {
-                cake.articulo_nuevo
+                cake.new_article
                 ?
                     <div className="mb-2">
                         <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-gray-900 uppercase bg-green-400 rounded-full">Nuevo</p>
@@ -38,10 +38,10 @@ const Card: React.FC<Props> = ({ cake }) => {
                 :''
                 }
                 {
-                    cake.agotado
+                    cake.sold
                     ?
                     <div className="mb-2">
-                        <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-white uppercase bg-red-500 rounded-full">AGOTADO</p>
+                        <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-white uppercase bg-red-500 rounded-full">sold</p>
                     </div>
                     :''
                 }
@@ -51,7 +51,7 @@ const Card: React.FC<Props> = ({ cake }) => {
                 <div>
                     <h3 className="text-xs font-bold text-gray-900 sm:text-sm md:text-base">
                       <Link to={`/detail/${cake.id}`} title="">
-                            {cake.nombre}
+                            {cake.name}
                             <span className="absolute inset-0" aria-hidden="true"></span>
                         </Link>
                     </h3>
@@ -85,8 +85,8 @@ const Card: React.FC<Props> = ({ cake }) => {
                 </div>
 
                 <div className="text-right">
-                    <p className="text-xs font-bold text-gray-900 sm:text-sm md:text-base">RD${cake.precio} </p>
-                    <del className="mt-0.5 text-xs sm:text-sm font-bold text-gray-500"> {cake.precio_anterior ? `RD$ ${cake.precio_anterior}` :''} </del>
+                    <p className="text-xs font-bold text-gray-900 sm:text-sm md:text-base">RD${cake.prince} </p>
+                    <del className="mt-0.5 text-xs sm:text-sm font-bold text-gray-500"> {cake.after_prince ? `RD$ ${cake.after_prince}` :''} </del>
                 </div>
             </div>
         </div>

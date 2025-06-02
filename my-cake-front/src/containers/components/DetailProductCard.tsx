@@ -10,13 +10,13 @@ const DetailProductCard = ({Cake}:Props) => {
   return (
     <div className="max-w-7xl mx-auto bg-white overflow-hidden lg:grid lg:grid-cols-2">
       <div className='bg-gray-100'>
-        <img src={Cake.imagen} alt={Cake.nombre} className="w-full lg:h-[500px] object-cover my-auto" />
+        <img src={Cake.image} alt={Cake.name} className="w-full lg:h-[500px] object-cover my-auto" />
       </div>
         
       <div className="p-6 pt-5 flex flex-col bg-gray-50">
         <div>
-          <h2 className="text-2xl font-bold mb-2">{Cake.nombre}</h2>
-          <p className="text-gray-700 mb-4">{Cake.descripcion}</p>
+          <h2 className="text-2xl font-bold mb-2">{Cake.name}</h2>
+          <p className="text-gray-700 mb-4">{Cake.description}</p>
           {/*
             <h3 className="font-semibold">Highlights:</h3>
            <ul className="list-disc list-inside mb-4">
@@ -58,7 +58,7 @@ const DetailProductCard = ({Cake}:Props) => {
         </div>
         <div className="flex justify-end items-end">
           <div className='flex flex-col items-end'>
-            <div className="text-2xl font-bold text-end">{Cake.precio_anterior && <del className='text-sm text-red-500 mb-auto text-top'>$ {Cake.precio_anterior}</del> } RD$ {Cake.precio}</div>
+            <div className="text-2xl font-bold text-end">{Cake.after_prince && <del className='text-sm text-red-500 mb-auto text-top'>$ {Cake.after_prince}</del> } RD$ {Cake.prince}</div>
             <button className="bg-black text-white py-2 px-4 hover:bg-gray-800 transition">
               Añadir al carrito
             </button>

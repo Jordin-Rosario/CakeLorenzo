@@ -4,8 +4,8 @@ from .models import Cake, ItemPedido, PerfilUsuario, Categoria, CakesTypes
 
 # Register your models here.
 class CakeAdmin(admin.ModelAdmin):
-    list_display = ["nombre"]
-    search_fields =  ("nombre","cake_type__type_name")
+    list_display = ["name"]
+    search_fields =  ("name","cake_type__type_name")
 
 class CategoriaAdmin(admin.ModelAdmin):
     pass

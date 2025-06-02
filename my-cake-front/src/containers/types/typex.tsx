@@ -23,16 +23,16 @@ export interface Categoria {
 
 export interface Cake {
     id: number;
-    nombre: string;
-    descripcion: string;
-    precio: number;
-    precio_anterior:number
-    imagen: string; // Puede ser una URL o un archivo base64 si estás trabajando con formularios
-    disponible: boolean;
-    oferta: boolean;
-    articulo_nuevo:boolean;
-    ocultar: boolean;
-    agotado: boolean;
+    name: string;
+    description: string;
+    prince: number;
+    after_prince:number
+    image: string; // Puede ser una URL o un archivo base64 si estás trabajando con formularios
+    available: boolean;
+    offer: boolean;
+    new_article:boolean;
+    hidden: boolean;
+    sold: boolean;
     cake_type: number;
-    creado_en: string; // ISO string (ej: '2025-05-20T15:00:00Z')
+    create_time: string; // ISO string (ej: '2025-05-20T15:00:00Z')
   }
