@@ -2,6 +2,7 @@ import React from 'react'
 import { Cake } from '../types/typex'
 import CakeImage from '../assets/cakeImage.png'
 import { Link } from 'react-router-dom';
+import MarkFavorite from './MarkFavorite';
 
 interface Props {
     cake: Cake;
@@ -12,12 +13,10 @@ const Card: React.FC<Props> = ({ cake }) => {
 
     <div className="relative group">
         <div className='h-92'>
-        <div className="overflow-hidden aspect-w-1 aspect-h-1">
-            <div className='p-5 bg-gray-100'>
-
-            <img 
-                    className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125 bg-gray-100" src={CakeImage} alt="" />
-            </div>
+            <div className="overflow-hidden aspect-w-1 aspect-h-1">
+                <div className='p-5 bg-gray-100'>
+                    <img className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125 bg-gray-100" src={CakeImage} alt="" />
+                </div>
             </div>
 
             <div className='absolute left-3 top-3'>
@@ -45,6 +44,10 @@ const Card: React.FC<Props> = ({ cake }) => {
                     </div>
                     :''
                 }
+            </div>
+
+            <div className='absolute right-1 top-3  z-20'>
+                <MarkFavorite productId={1} isFavorite={cake.is_favorite}/>
             </div>
 
             <div className="flex items-start justify-between mt-4 space-x-4 ">

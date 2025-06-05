@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cake, ItemPedido, PerfilUsuario, Categoria, CakesTypes
+from .models import Cake, ItemPedido, PerfilUsuario, Categoria, CakesTypes, FavoriteCake
 
 
 # Register your models here.
@@ -16,8 +16,11 @@ class CakesTypesAdmin(admin.ModelAdmin):
 class PerfilUsuarioAdmin(admin.ModelAdmin):
     pass
 
+class FavoriteCakeAdmin(admin.ModelAdmin):
+    pass
 
 admin.site.register(Cake, CakeAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(CakesTypes, CakesTypesAdmin)
 admin.site.register(PerfilUsuario, PerfilUsuarioAdmin)
+admin.site.register(FavoriteCake, FavoriteCakeAdmin)

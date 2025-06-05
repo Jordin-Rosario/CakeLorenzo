@@ -2,8 +2,6 @@ import  {NavLink} from 'react-router-dom';
 import logo from '../assets/logoPrueba.png';
 import { useUserStore } from '../stores/userStore';
 import { useState, useEffect } from 'react';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Navbar = () => {
   const { user } = useUserStore();
@@ -46,7 +44,9 @@ const Navbar = () => {
                   currentUser &&
                 <li>
                   <NavLink to="/contact" className="block py-2 px-3 h-full my-auto rounded md:border-0 md:hover:text-gray-700 md:p-0">
-                    <FontAwesomeIcon icon={faCartShopping} className="text-md text-gray-800" />
+                    {/* <FontAwesomeIcon icon={faCartShopping} className="text-md text-gray-800" /> */}
+                    {/* <ShoppingCart/> */}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" className="text-black lucide lucide-shopping-cart-icon lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
                   </NavLink>
                 </li>
                 }

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Cake, Categoria, PerfilUsuario
+from .models import Cake, Categoria, PerfilUsuario, FavoriteCake
 from django.contrib.auth.models import User
 
 from django.contrib.auth import get_user_model
@@ -63,7 +63,13 @@ class PerfilUsuarioSerializer(serializers.ModelSerializer):
         return instance
 
 class CakeSerializers(serializers.ModelSerializer):
-
+    is_favorite = serializers.SerializerMethodField()
+    def get_is_favorite(self, obj):
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            return FavoriteCake.objects.filter(cake=obj.id, user=request.user).exists()
+        return False
+    
     class Meta:
         model = Cake
         fields = '__all__'

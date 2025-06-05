@@ -28,6 +28,7 @@ export interface Cake {
     prince: number;
     after_prince:number
     image: string; // Puede ser una URL o un archivo base64 si estás trabajando con formularios
+    is_favorite:boolean
     available: boolean;
     offer: boolean;
     new_article:boolean;
