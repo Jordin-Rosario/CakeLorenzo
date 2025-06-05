@@ -25,7 +25,7 @@ const Card: React.FC<Props> = ({ cake }) => {
                 cake.offer 
                 ? 
                     <div className="mb-1">
-                        <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-black bg-yellow-300 uppercase rounded-full text-center">offer</p>
+                        <p className="sm:px-3 sm:py-1.5 px-1.5 py-1 text-[8px] sm:text-xs font-bold tracking-wide text-black bg-yellow-300 uppercase rounded-full text-center">oferta</p>
                     </div>
                 : ''
                 }

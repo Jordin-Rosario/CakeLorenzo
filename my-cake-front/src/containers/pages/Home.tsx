@@ -2,18 +2,32 @@ import { useState, useEffect } from 'react';
 import api from '../services/api';
 import Card from '../components/Card';
 
+import SkeletonCard from '../components/SkeletonCard';
+
 const req = async (url: string) => {
-  const response = await api.get(url)
-  const data = await response.data;
-  return data
+  try{
+    const response = await api.get(url)
+    return  await response.data;
+  }catch (error) {
+    return error;
+  }
 };
 
 const Home = () => {
   const [data, setData] = useState<any>(null);
+  const [messageError, setMessageError] = useState<string>();
 
   useEffect(() => {
     const req_ = async () => {
       const data = await req('api/cakes/');
+      
+      if (data.message) {
+        console.log('ASD')
+        console.error('Error fetching cakes:', data.message);
+        setMessageError(`Error al optener los datos: ${data.message}`)
+        return;
+      }
+
       setData(data);
     }
 
@@ -38,7 +52,18 @@ const Home = () => {
 
                   ))
               ) : (
-                <span className='text-black'>Cargando...</span>
+                messageError ? (
+                  <div className='bg-red-200 text-red-800 text-lg px-2 py-1 border border-red-400 rounded-sm col-span-4'>
+                    <p className='wrap-none'>{messageError}</p>
+                  </div>
+                ): (
+                  <>
+                    <SkeletonCard/>
+                    <SkeletonCard/>
+                    <SkeletonCard/>
+                    <SkeletonCard/>
+                  </>
+                )
               )
             }
 

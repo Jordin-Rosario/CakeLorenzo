@@ -19,7 +19,7 @@ const Navbar = () => {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2">
           <a className="flex items-center space-x-1 rtl:space-x-reverse">
               <img src={logo} className="h-16" alt="Flowbite Logo" />
-              <h1 className="text-gray-700 font-bold text-2xl">Cake Lorenzo</h1>
+              <h1 className="text-gray-700 font-bold text-2xl font-poppins">Cake Lorenzo</h1>
           </a>
           <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-default" aria-expanded="false">
             <span className="sr-only">Open main menu</span>

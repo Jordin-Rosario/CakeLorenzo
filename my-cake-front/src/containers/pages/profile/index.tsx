@@ -83,7 +83,7 @@ const Profile = () => {
     <div className="container mx-auto">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
 
-        <h1 className="text-4xl font-semibold mt-10 mb-1">Editar mi perfil</h1>
+        <h1 className="text-4xl font-semibold mt-10 mb-1 font-poppins">Mi perfil</h1>
         <hr  className="mb-9"/>
 
         <form  className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -152,7 +152,7 @@ const Profile = () => {
                   id="email"
                   type="text"
                   autoComplete="email"
-                  placeholder="Email eje: emailejemplo@gmail.com"
+                  placeholder="ejemplo@gmail.com"
                   {...register("email", { required: "El email es obligatorio" })}
                   className="block w-full rounded-sm bg-gray-50 px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-gray-900 sm:text-sm/6"
                 />
@@ -172,7 +172,7 @@ const Profile = () => {
                   id="telefono"
                   type="text"
                   autoComplete="telefono"
-                  placeholder="Teléfono eje: 809-555-4488"
+                  placeholder="809-555-4488"
                   {...register("telefono", )}
                   className="block w-full rounded-sm bg-gray-50 px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-gray-900 sm:text-sm/6"
                 />
