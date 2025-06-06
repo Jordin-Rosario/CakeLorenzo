@@ -45,7 +45,6 @@ const Profile = () => {
 
   const onSubmit = async (data: any) => {
     try{
-    console.log(data)
     const req = await api.patch(`/perfil/${user?.id}/`, 
       // data
       {

@@ -67,9 +67,21 @@ class CakeSerializers(serializers.ModelSerializer):
     def get_is_favorite(self, obj):
         request = self.context.get('request')
         if request and request.user.is_authenticated:
-            return FavoriteCake.objects.filter(cake=obj.id, user=request.user).exists()
+            return FavoriteCake.objects.filter(cake=obj.id, user=request.user, is_active = True).exists()
         return False
     
     class Meta:
         model = Cake
         fields = '__all__'
+
+
+class FavoriteCakeSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = FavoriteCake
+        fields = ['id', 'cake', 'is_active', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        return FavoriteCake.objects.create(user=user, **validated_data)
+

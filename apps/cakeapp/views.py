@@ -1,8 +1,9 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from .models import Cake
-from .serializers import CakeSerializers, PerfilUsuarioSerializer, AuthMeSerializer
+from .models import Cake, FavoriteCake
+from .serializers import CakeSerializers, PerfilUsuarioSerializer, AuthMeSerializer, FavoriteCakeSerializers
 from rest_framework.filters import SearchFilter
+from rest_framework import viewsets
 from core.utils import SmallResultsSetPagination
 from django.shortcuts import get_object_or_404
 from .models import PerfilUsuario
@@ -84,3 +85,28 @@ class CakeViewSet(ReadOnlyModelViewSet):
     search_fields = ['name']
     # permission_classes = [IsAuthenticated]
     pagination_class = SmallResultsSetPagination 
+
+
+
+class FavoriteCakeViewSet(viewsets.ModelViewSet):
+    queryset = FavoriteCake.objects.all()
+    serializer_class = FavoriteCakeSerializers
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        cake_id = self.request.query_params.get('cake')  # <-- busca ?cake=ID en la URL
+        queryset = FavoriteCake.objects.filter(user=user)
+        
+        if cake_id:
+            queryset = queryset.filter(cake__id=cake_id)
+        
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def destroy(self, request, *args, **kwargs):
+        return Response({"detail": "Method not allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

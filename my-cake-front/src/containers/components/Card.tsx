@@ -47,7 +47,7 @@ const Card: React.FC<Props> = ({ cake }) => {
             </div>
 
             <div className='absolute right-1 top-3  z-20'>
-                <MarkFavorite productId={1} isFavorite={cake.is_favorite}/>
+                <MarkFavorite productId={cake.id} isFavorite={cake.is_favorite}/>
             </div>
 
             <div className="flex items-start justify-between mt-4 space-x-4 ">

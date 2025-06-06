@@ -29,7 +29,7 @@ const DetailProductCard = ({Cake}:Props) => {
             <h2 className="text-2xl font-bold mb-2">{Cake.name}</h2>
             <p className="text-gray-700 mb-4">{Cake.description}</p>
           </div>
-          <MarkFavorite productId={1} isFavorite={Cake.is_favorite}/>
+          <MarkFavorite productId={Cake.id} isFavorite={Cake.is_favorite}/>
         </div>
         <div className='mt-auto'>
           <form action="">

@@ -13,7 +13,6 @@ const DetailProduct = () => {
   const getDetail = async () => {
     const req = await api.get(`api/cakes/${id}/`)
     const data = req.data;
-    console.log(data)
     setCake(data)
   };
 

@@ -1,16 +1,60 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import api from "../services/api";
 
 type MarkFavoriteProps = {
     productId:number;
     isFavorite?:boolean;
 }
 
+// GET /api/favorites/?cake=6
+const getFavorite = async (productId:number) => {
+  try {
+    const response = await api.get(`api/favorites/?cake=${productId}`);
+    return await response.data[0];
+  } catch (error) {
+    console.error('Error fetching favorite:', error);
+    throw error;
+  }
+}
+
+const reqUpdate = async (isActive:boolean, productId:number) => {
+  const req = await api.patch(`api/favorites/${productId}/`, {
+    is_active: isActive
+  });
+  
+  return await req.data; 
+};
+
+const reqCreate = async (productId:number) => {
+  const req = await api.post(`api/favorites/`, {
+    cake: productId,
+    is_active: true
+  }); 
+  return await req.data; 
+}
+
 const MarkFavorite = ({productId, isFavorite = false}:MarkFavoriteProps) => {
+  
+  const [isFavoriteState, setIsFavoriteState] = useState(isFavorite)  ;
+  
+  const maskFavoriteReq = async () => {
+    setIsFavoriteState(!isFavoriteState);
+    
+    try {
+      const data = await getFavorite(productId);
+      if (data) {
+        // If the favorite exists, toggle its status
+        const dataReq = await reqUpdate(!isFavoriteState, data.id);
+        console.log('update favorite', dataReq);
 
-  const [isFavoriteState, setIsFavoriteState] = useState(isFavorite)
-
-  const maskFavoriteReq = () => {
-    setIsFavoriteState(!isFavoriteState)
+      } else {
+        // If it doesn't exist, create a new favorite
+        const dataReq = await reqCreate(productId)
+        console.log('create favorite', dataReq);
+      }
+    } catch (error) {
+      console.error('Error fetching favorite status:', error);
+    }
   };
 
   return (
